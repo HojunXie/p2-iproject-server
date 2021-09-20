@@ -7,10 +7,6 @@
   },
   "description": "Individual Portfolio Server",
   "main": "app.js",
-  "devDependencies": {
-    "nodemon": "^2.0.12",
-    "sequelize-cli": "^6.2.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HojunXie/p2-iproject-server.git"
@@ -22,6 +18,10 @@
     "url": "https://github.com/HojunXie/p2-iproject-server/issues"
   },
   "homepage": "https://github.com/HojunXie/p2-iproject-server#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "sequelize-cli": "^6.2.0"
+  },
   "dependencies": {
     "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
