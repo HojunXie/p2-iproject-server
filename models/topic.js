@@ -14,8 +14,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Topic.init({
-    title: DataTypes.STRING,
-    userId: DataTypes.INTEGER
+    title:  {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Title can't be empty"
+        },
+        notNull: {
+          msg: "Title can't be empty"
+        }
+      }
+    },
+    userId: DataTypes.INTEGER,
+    movieId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Topic',

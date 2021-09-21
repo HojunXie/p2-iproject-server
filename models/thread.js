@@ -14,11 +14,38 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Thread.init({
-    title: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Title can't be empty"
+        },
+        notNull: {
+          msg: "Title can't be empty"
+        }
+      }
+    },
     userId: DataTypes.INTEGER,
     topicId: DataTypes.INTEGER,
-    content: DataTypes.STRING,
-    imgUrl: DataTypes.STRING
+    content:  {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Content can't be empty"
+        },
+        notNull: {
+          msg: "Content can't be empty"
+        }
+      }
+    },
+    imgUrl: {
+      type: DataTypes.STRING,
+      validate: {
+        isUrl: "image format is invalid"
+      }
+    } 
   }, {
     sequelize,
     modelName: 'Thread',
