@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Topic.belongsTo(models.User)
+      Topic.hasMany(models.Thread)
     }
   };
   Topic.init({
@@ -26,8 +27,21 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    subtitle: DataTypes.STRING,
     userId: DataTypes.INTEGER,
-    movieId: DataTypes.INTEGER
+    movieId: DataTypes.INTEGER,
+    imgUrl: {
+      type: DataTypes.STRING,
+      validate: {
+        isUrl: "image format is invalid"
+      }
+    },
+    embed: {
+      type: DataTypes.STRING,
+      validate: {
+        isUrl: "url is invalid"
+      }
+    }
   }, {
     sequelize,
     modelName: 'Topic',

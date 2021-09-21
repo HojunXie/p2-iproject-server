@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Thread.belongsTo(models.User)
+      Thread.belongsTo(models.User)
     }
   };
   Thread.init({
@@ -45,7 +46,13 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isUrl: "image format is invalid"
       }
-    } 
+    },
+    embed: {
+      type: DataTypes.STRING,
+      validate: {
+        isUrl: "url is invalid"
+      }
+    }
   }, {
     sequelize,
     modelName: 'Thread',

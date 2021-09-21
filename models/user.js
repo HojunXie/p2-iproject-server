@@ -1,4 +1,5 @@
 'use strict';
+const { encrypt } = require("../helpers/bcrypt")
 const {
   Model
 } = require('sequelize');
@@ -10,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasMany(models.Topic)
+      User.hasMany(models.Thread)
     }
   };
   User.init({
@@ -56,6 +58,9 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   }, {
+    hooks: (instance) => {
+      instance.password = encrypt(instance.password)
+    },
     sequelize,
     modelName: 'User',
   });
