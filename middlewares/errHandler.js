@@ -23,6 +23,12 @@ const errorHandler = (err, req, res, next) => {
     case "Invalid Type!":
       res.status(400).json({message: "id must be a number"})
       break;
+    case "uploadFail":
+      res.status(409).json({message: "fail to upload image"})
+      break;
+    case 'file type invalid':
+      res.status(400).json({message: "file must be an image"})
+      break;
     default:
       console.log(err)
       res.status(500).json({message: "Internal Server Error"})
