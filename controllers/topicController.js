@@ -9,24 +9,11 @@ class TopicController {
       imgUrl: req.body.imgUrl,
       userId: req.user.id,
       movieId: req.body.movieId,
-      likes: 0
+      movieType: req.body.movieType
     }
     try {
       const data = await Topic.create(newData)
       res.status(201).json(data)
-    } catch (error) {
-      next(error)
-    }
-  }
-  static async popularTopicList (req, res, next) {
-    try {
-      const data = await Topic.findAll({
-        limit: 15,
-        order: [
-          ['likes', 'DESC']
-        ]
-      })
-      res.status(200).json(data)
     } catch (error) {
       next(error)
     }
@@ -40,6 +27,7 @@ class TopicController {
       const data = await Topic.findAll({
         where: {
           movieId: id
+          movieType: req.body.movieType
         }
       })
       if (!data) {

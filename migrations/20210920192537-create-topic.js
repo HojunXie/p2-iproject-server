@@ -34,9 +34,6 @@ module.exports = {
       embed: {
         type: Sequelize.STRING
       },
-      likes: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
