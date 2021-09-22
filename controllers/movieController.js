@@ -30,6 +30,7 @@ class MovieController {
           query: title
         }
       })
+      res.status(200).json(tvLists.data)
     } catch (error) {
       next(error)
     }
@@ -49,26 +50,29 @@ class MovieController {
       })
       const getMovie = await axios.get(`${movieBaseUrl}/movie/${id}`, {
         params: {
-          api_key: movieAPIKey,
+          api_key: movieAPIKey
         }
       })
-      const getTv = await axios.get(`${movieBaseUrl}/tv/${id}`, {
-        params: {
-          api_key: movieAPIKey,
-        }
-      })
+      // const getTv = await axios.get(`${movieBaseUrl}/tv/${id}`, {
+      //   params: {
+      //     api_key: movieAPIKey,
+      //   }
+      // })
+      res.status(200).json(getTv.data)
     } catch (error) {
       next(error)
     }
   }
   static async getPopular (req, res, next) {
     try {
+      console.log('tes')
       const popular = await axios.get(`${movieBaseUrl}/movie/popular`, {
         params: {
           api_key: movieAPIKey,
         }
       })
-      res.status(200).json(popular)
+      const { data } = popular
+      res.status(200).json(data)
     } catch (error) {
       next(error)
     }

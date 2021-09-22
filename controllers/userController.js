@@ -31,7 +31,6 @@ class UserController {
           username: input.username
         }
       })
-      console.log(userData)
       if (userData) {
         if (compare(input.password, userData.password)) {
           res.status(200).json({access_token: generateToken(input)})
