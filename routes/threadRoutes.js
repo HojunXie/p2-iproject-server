@@ -1,6 +1,6 @@
 const express = require('express')
 const ThreadController = require('../controllers/threadController')
-const authen = require('../middlewares/authentication')
+const authen = require('../middlewares/authen')
 const authz2 = require('../middlewares/authz2')
 const imageKit = require('../middlewares/imagekit')
 const upload = require('../middlewares/multer')
