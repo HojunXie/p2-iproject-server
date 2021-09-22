@@ -26,7 +26,7 @@ class TopicController {
       }
       const data = await Topic.findAll({
         where: {
-          movieId: id
+          movieId: id,
           movieType: req.body.movieType
         }
       })
