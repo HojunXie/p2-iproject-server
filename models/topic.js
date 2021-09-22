@@ -41,9 +41,8 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isUrl: "url is invalid"
       }
-    },
-    likes: DataTypes.INTEGER
-  }, {
+    }
+}, {
     sequelize,
     modelName: 'Topic',
   });
