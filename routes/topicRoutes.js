@@ -1,16 +1,16 @@
 const express = require('express')
-const topicController = require('../controllers/topicController')
+const TopicController = require('../controllers/topicController')
 const authen = require('../middlewares/authentication')
 const authz = require('../middlewares/authz')
 const imageKit = require('../middlewares/imagekit')
 const upload = require('../middlewares/multer')
 const topicRouter = express.Router()
 
-topicRouter.get('/', topicController.popularTopicList)
-topicRouter.get('/:id', topicController.topicsByMovieId)
+topicRouter.get('/', TopicController.popularTopicList)
+topicRouter.get('/:id', TopicController.topicsByMovieId)
 
 topicRouter.use(authen)
-topicRouter.post('/', upload.single("imgUrl"), imageKit, topicController.createTopic)
-topicRouter.delete('/:id', authz, topicController.deletetopic)
+topicRouter.post('/', upload.single("imgUrl"), imageKit, TopicController.createTopic)
+topicRouter.delete('/:id', authz, TopicController.deletetopic)
 
 module.exports = topicRouter
