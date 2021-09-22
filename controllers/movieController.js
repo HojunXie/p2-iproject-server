@@ -8,9 +8,13 @@ class MovieController {
   static async getMovies (req, res, next) {
     try {
       const title = req.query.title ? req.query.title : ''
-      const animeList = await axios.get(`${animeBaseUrl}/v1/anime`, {
+      const page = req.query.page ? req.query.page : 1
+      const tmdbPage = req.query.page > 1 ? Math.ceil(Number(req.query.page) / 2) : 1
+      const animeLists = await axios.get(`${animeBaseUrl}/v1/anime`, {
         params: {
           title: title,
+          page: page,
+          per_page: 10
         },
         headers:  {
           Authorization: `Bearer ${aniAPIKey}`,
@@ -21,16 +25,29 @@ class MovieController {
       const movieLists = await axios.get(`${movieBaseUrl}/search/movie`, {
         params: {
           api_key: movieAPIKey,
-          query: title
+          query: title,
+          page: tmdbPage,
+          size: 10
         }
       })
       const tvLists = await axios.get(`${movieBaseUrl}/search/tv`, {
         params: {
           api_key: movieAPIKey,
-          query: title
+          query: title,
+          page: tmdbPage
         }
       })
-      res.status(200).json(tvLists.data)
+      const movie1 = movieLists.data.results.slice(1, 11)
+      const movie2 = movieLists.data.results.slice(10)
+      const tv1 = tvLists.data.results.slice(1, 11)
+      const tv2 = tvLists.data.results.slice(10)
+      let response = animeLists.data.data.documents
+      if (Number(page) % 2 === 0) {
+        response = response.concat(movie2).concat(tv2)
+      } else {
+        response = response.concat(movie1).concat(tv1)
+      }
+      res.status(200).json(response)
     } catch (error) {
       next(error)
     }
