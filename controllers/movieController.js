@@ -14,7 +14,7 @@ class MovieController {
         params: {
           title: title,
           page: page,
-          per_page: 1
+          per_page: 10
         },
         headers:  {
           Authorization: `Bearer ${aniAPIKey}`,
@@ -36,9 +36,9 @@ class MovieController {
           page: tmdbPage
         }
       })
-      const movie1 = movieLists.data.results.slice(0, 1)
+      const movie1 = movieLists.data.results.slice(0, 10)
       const movie2 = movieLists.data.results.slice(10)
-      const tv1 = tvLists.data.results.slice(0, 1)
+      const tv1 = tvLists.data.results.slice(0, 10)
       const tv2 = tvLists.data.results.slice(10)
       let response = animeLists.data.data.documents
       if (!response) {
@@ -49,6 +49,7 @@ class MovieController {
       } else {
         response = response.concat(movie1).concat(tv1)
       }
+      console.log(movie1.length)
       res.status(200).json(response)
     } catch (error) {
       next(error)
