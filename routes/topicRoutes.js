@@ -6,7 +6,6 @@ const imageKit = require('../middlewares/imagekit')
 const upload = require('../middlewares/multer')
 const topicRouter = express.Router()
 
-topicRouter.get('/', TopicController.popularTopicList)
 topicRouter.get('/:id', TopicController.topicsByMovieId)
 
 topicRouter.use(authen)

@@ -61,6 +61,7 @@ class MovieController {
       const popular = await axios.get(`${movieBaseUrl}/movie/popular`, {
         params: {
           api_key: movieAPIKey,
+          page: Math.ceil(Math.random()*10)
         }
       })
       const { data } = popular
