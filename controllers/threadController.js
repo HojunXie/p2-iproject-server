@@ -1,4 +1,4 @@
-const { Thread } = require('../models')
+const { Thread, User } = require('../models')
 
 class ThreadController {
   static async createThread (req, res, next) {
