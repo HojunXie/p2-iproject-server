@@ -37,6 +37,33 @@ class TopicController {
       next(error)
     }
   }
+  static async updateTopic (req, res, next) {
+    const newData = {
+      title: req.body.title,
+      subtitle: req.body.subtitle,
+      userId: req.user.id,
+      movieId: req.body.movieId,
+      movieType: req.body.movieType
+    }
+    const id = Number(req.params.id)
+    try {
+      if (typeof id !== "number") {
+        throw { name: "Invalid Type" }
+      }
+      const data = await Topic.update(newData, {
+        where: {
+          id: id
+        },
+        returning: true
+      })
+      if (data[0] === 0) {
+        throw {name: "not found"}
+      }
+      res.status(200).json(data[1][0])
+    } catch (error) {
+      next(error)
+    }
+  }
   static async deleteTopic (req, res, next) {
     const id = Number(req.params.id)
     try {

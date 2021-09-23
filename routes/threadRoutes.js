@@ -10,6 +10,7 @@ threadRouter.get('/:id', threadController.ThreadsByTopicId)
 
 threadRouter.use(authen)
 threadRouter.post('/', upload.single("imgUrl"), imageKit, threadController.createThread)
+threadRouter.put('/:id', authz2, threadController.updateThread)
 threadRouter.delete('/:id', authz2, threadController.deleteThread)
 
 module.exports = threadRouter

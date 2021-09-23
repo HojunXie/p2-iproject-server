@@ -11,6 +11,7 @@ topicRouter.get('/:id', topicController.topicsByMovieId)
 
 topicRouter.use(authen)
 topicRouter.post('/', upload.single("imgUrl"), imageKit, topicController.createTopic)
+topicRouter.put('/:id', authz, topicController.updateTopic)
 topicRouter.delete('/:id', authz, topicController.deletetopic)
 
 module.exports = topicRouter
