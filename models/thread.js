@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Thread.belongsTo(models.User)
-      Thread.belongsTo(models.User)
+      Thread.belongsTo(models.User, {foreignKey: 'userId'})
+      Thread.belongsTo(models.Topic, {foreignKey: 'topicId'})
     }
   };
   Thread.init({

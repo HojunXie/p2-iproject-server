@@ -26,9 +26,11 @@ class ThreadController {
       const data = await Thread.findAll({
         where: {
           topicId: id,
-          movieType: req.params.movieType
         },
-        include: User
+        include: {
+          model: User,
+          attributes: { exclude: ['password'] }
+        }
       })
       if (!data) {
         throw {name: "not found"}
@@ -44,8 +46,6 @@ class ThreadController {
       content: req.body.content,
       embed: req.body.embed,
       imgUrl: req.body.imgUrl,
-      userId: req.user.id,
-      topicId: req.body.topicId
     }
     const id = Number(req.params.id)
     try {
