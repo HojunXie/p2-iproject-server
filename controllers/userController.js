@@ -1,6 +1,6 @@
 const { User } = require('../models')
 const { compare } = require('../helpers/bcrypt')
-const { generateToken } =  require('../helpers/JWT')
+const { generateToken } =  require('../helpers/jwt')
 
 class UserController {
   static async register (req, res, next) {
