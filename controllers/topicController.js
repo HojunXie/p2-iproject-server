@@ -25,9 +25,12 @@ class TopicController {
       const data = await Topic.findAll({
         where: {
           movieId: id,
-          movieType: req.params.movieType
+          movieType: req.params.type
         },
-        include: User
+        include: {
+          model: User,
+          attributes: { exclude: ['password'] }
+        }
       })
       if (!data) {
         throw {name: "not found"}
@@ -41,9 +44,6 @@ class TopicController {
     const newData = {
       title: req.body.title,
       subtitle: req.body.subtitle,
-      userId: req.user.id,
-      movieId: req.body.movieId,
-      movieType: req.body.movieType
     }
     const id = Number(req.params.id)
     try {
@@ -72,7 +72,7 @@ class TopicController {
       }
       const data = await Topic.findByPk(id)
       if (!data) {
-        throw {name: "Topic not found"}
+        throw {name: "not found"}
       }
       await Topic.destroy({
         where: {

@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Topic.belongsTo(models.User)
-      Topic.hasMany(models.Thread)
+      Topic.belongsTo(models.User, {foreignKey: 'userId'})
+      Topic.hasMany(models.Thread, {foreignKey: 'topicId'})
     }
   };
   Topic.init({
@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     subtitle: DataTypes.STRING,
     userId: DataTypes.INTEGER,
-    movieId: DataTypes.INTEGER
+    movieId: DataTypes.INTEGER,
+    movieType: DataTypes.STRING 
 }, {
     sequelize,
     modelName: 'Topic',

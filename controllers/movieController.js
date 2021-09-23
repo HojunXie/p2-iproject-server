@@ -49,7 +49,6 @@ class MovieController {
       } else {
         response = response.concat(movie1).concat(tv1)
       }
-      console.log(movie1.length)
       res.status(200).json(response)
     } catch (error) {
       next(error)
@@ -57,7 +56,6 @@ class MovieController {
   }
   static async getPopular (req, res, next) {
     try {
-      console.log('tes')
       const popular = await axios.get(`${movieBaseUrl}/movie/popular`, {
         params: {
           api_key: movieAPIKey,
