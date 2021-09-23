@@ -1,4 +1,4 @@
-const { verify } = require('../helpers/JWT')
+const { verify } = require('../helpers/jwt')
 const { User } = require('../models')
 
 const authen = async (req, res, next) => {
