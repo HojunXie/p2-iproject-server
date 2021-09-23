@@ -38,6 +38,34 @@ class ThreadController {
       next(error)
     }
   }
+  static async updateThread (req, res, next) {
+    const newData = {
+      title: req.body.title,
+      content: req.body.content,
+      embed: req.body.embed,
+      imgUrl: req.body.imgUrl,
+      userId: req.user.id,
+      topicId: req.body.topicId
+    }
+    const id = Number(req.params.id)
+    try {
+      if (typeof id !== "number") {
+        throw { name: "Invalid Type" }
+      }
+      const data = await Thread.update(newData, {
+        where: {
+          id: id
+        },
+        returning: true
+      })
+      if (data[0] === 0) {
+        throw {name: "not found"}
+      }
+      res.status(200).json(data[1][0])
+    } catch (error) {
+      next(error)
+    }
+  }
   static async deleteThread (req, res, next) {
     const id = Number(req.params.id)
     try {
