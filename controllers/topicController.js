@@ -27,7 +27,7 @@ class TopicController {
       const data = await Topic.findAll({
         where: {
           movieId: id,
-          movieType: req.body.movieType
+          movieType: req.params.type
         }
       })
       if (!data) {
