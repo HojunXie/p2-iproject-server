@@ -1,12 +1,10 @@
-const { Topic } = require('../models')
+const { Topic, User } = require('../models')
 
 class TopicController {
   static async createTopic (req, res, next) {
     const newData = {
       title: req.body.title,
       subtitle: req.body.subtitle,
-      embed: req.body.embed,
-      imgUrl: req.body.imgUrl,
       userId: req.user.id,
       movieId: req.body.movieId,
       movieType: req.body.movieType
@@ -27,8 +25,9 @@ class TopicController {
       const data = await Topic.findAll({
         where: {
           movieId: id,
-          movieType: req.params.type
-        }
+          movieType: req.params.movieType
+        },
+        include: User
       })
       if (!data) {
         throw {name: "not found"}

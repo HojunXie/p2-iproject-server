@@ -29,19 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     subtitle: DataTypes.STRING,
     userId: DataTypes.INTEGER,
-    movieId: DataTypes.INTEGER,
-    imgUrl: {
-      type: DataTypes.STRING,
-      validate: {
-        isUrl: "image format is invalid"
-      }
-    },
-    embed: {
-      type: DataTypes.STRING,
-      validate: {
-        isUrl: "url is invalid"
-      }
-    }
+    movieId: DataTypes.INTEGER
 }, {
     sequelize,
     modelName: 'Topic',
