@@ -25,8 +25,10 @@ class ThreadController {
       }
       const data = await Thread.findAll({
         where: {
-          topicId: id
-        }
+          topicId: id,
+          movieType: req.params.movieType
+        },
+        include: User
       })
       if (!data) {
         throw {name: "not found"}
