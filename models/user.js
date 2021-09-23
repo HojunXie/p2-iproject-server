@@ -58,8 +58,10 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   }, {
-    hooks: (instance) => {
-      instance.password = encrypt(instance.password)
+    hooks: {
+      beforeCreate: (instance) => {
+        instance.password = encrypt(instance.password)
+      }
     },
     sequelize,
     modelName: 'User',

@@ -2,7 +2,7 @@ const { User } = require('../models')
 const { compare } = require('../helpers/bcrypt')
 const { generateToken } =  require('../helpers/JWT')
 
-class userController {
+class UserController {
   static async register (req, res, next) {
     const newData = {
       username: req.body.username,
@@ -46,4 +46,4 @@ class userController {
   }
 }
 
-module.exports = userController
+module.exports = UserController
